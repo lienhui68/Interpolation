@@ -3,6 +3,7 @@ package com.eh.container;
 import com.beust.jcommander.internal.Lists;
 import com.eh.arithmetic.Arithmetic;
 import com.eh.constant.Constants;
+import com.eh.enums.InterpolationKind;
 import com.eh.model.Point;
 import com.eh.model.ScreenLocation;
 import com.eh.util.ConsoleUtil;
@@ -104,7 +105,9 @@ public class GraphicsPanel extends JPanel {
     }
 
     private void drawViewPoints(Graphics2D g) {
-        DrawUtil.drawViewPoints(g, Arithmetic.buildArithmetic(ControlPanel.interpolationKind).buildViewPoints(clickPoints));
+//        DrawUtil.drawViewPoints(g, Arithmetic.buildArithmetic(ControlPanel.interpolationKind).buildViewPoints(clickPoints));
+        DrawUtil.drawViewPoints(g, Arithmetic.buildArithmetic(InterpolationKind.Lagrange).buildViewPoints(clickPoints));
+        DrawUtil.drawViewPoints(g, Arithmetic.buildArithmetic(InterpolationKind.Newton).buildViewPoints(clickPoints));
     }
 
     public List<Point> getClickPoints() {
