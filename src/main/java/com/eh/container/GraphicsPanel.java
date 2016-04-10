@@ -81,6 +81,8 @@ public class GraphicsPanel extends JPanel {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                if (!drawable)
+                    return;
                 Point p = DrawUtil.convertScreenLocation2Point(new ScreenLocation(e.getX(), e.getY()));
                 if (!isLegal(p)) {
                     ConsoleUtil.warn(String
@@ -105,7 +107,7 @@ public class GraphicsPanel extends JPanel {
     }
 
     private void drawViewPoints(Graphics2D g) {
-//        DrawUtil.drawViewPoints(g, Arithmetic.buildArithmetic(ControlPanel.interpolationKind).buildViewPoints(clickPoints));
+        //        DrawUtil.drawViewPoints(g, Arithmetic.buildArithmetic(ControlPanel.interpolationKind).buildViewPoints(clickPoints));
         DrawUtil.drawViewPoints(g, Arithmetic.buildArithmetic(InterpolationKind.Lagrange).buildViewPoints(clickPoints));
         DrawUtil.drawViewPoints(g, Arithmetic.buildArithmetic(InterpolationKind.Newton).buildViewPoints(clickPoints));
     }

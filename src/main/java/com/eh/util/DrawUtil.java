@@ -2,7 +2,6 @@ package com.eh.util;
 
 import com.eh.constant.Constants;
 import com.eh.container.ControlPanel;
-import com.eh.enums.InterpolationKind;
 import com.eh.model.Point;
 import com.eh.model.ScreenLocation;
 
