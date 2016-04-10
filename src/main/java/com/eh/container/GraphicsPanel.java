@@ -1,6 +1,7 @@
 package com.eh.container;
 
 import com.beust.jcommander.internal.Lists;
+import com.eh.arithmetic.Arithmetic;
 import com.eh.constant.Constants;
 import com.eh.model.Point;
 import com.eh.model.ScreenLocation;
@@ -24,7 +25,6 @@ public class GraphicsPanel extends JPanel {
      */
     private boolean drawable;
     private List<Point> clickPoints = Lists.newArrayList();
-    private List<Point> viewPoints = Lists.newArrayList();
 
     public GraphicsPanel() {
         initGraphicsPanel();
@@ -37,7 +37,9 @@ public class GraphicsPanel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         initCoordinateSystem(g2d);
         drawClickPoints(g2d);
-        drawViewPoints(g2d);
+        if (clickPoints.size() > 1) {
+            drawViewPoints(g2d);
+        }
     }
 
     private void initGraphicsPanel() {
@@ -85,9 +87,8 @@ public class GraphicsPanel extends JPanel {
                                     p.getX(), p.getY(), -300, 300, -200, 200));
                 } else {
                     ConsoleUtil.write(String.format("Pressed [%d, %d]...", p.getX(), p.getY()));
+                    clickPoints.add(p);
                 }
-                clickPoints.add(p);
-                viewPoints.add(p);
                 JPanel panel = (JPanel) e.getSource();
                 panel.repaint();
             }
@@ -103,18 +104,11 @@ public class GraphicsPanel extends JPanel {
     }
 
     private void drawViewPoints(Graphics2D g) {
-        DrawUtil.drawClickPoints(g, viewPoints);
-    }
-
-    public List<Point> getViewPoints() {
-        return viewPoints;
+        DrawUtil.drawViewPoints(g, Arithmetic.buildArithmetic(ControlPanel.interpolationKind).buildViewPoints(clickPoints));
     }
 
     public List<Point> getClickPoints() {
         return clickPoints;
     }
 
-    public void setViewPoints(List<Point> viewPoints) {
-        this.viewPoints = viewPoints;
-    }
 }

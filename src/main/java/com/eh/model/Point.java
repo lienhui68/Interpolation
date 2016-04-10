@@ -1,9 +1,11 @@
 package com.eh.model;
 
+import java.util.Comparator;
+
 /**
  * Created by David on 2016/4/10.
  */
-public class Point {
+public class Point implements Comparable<Point> {
     private int x;
     private int y;
 
@@ -29,5 +31,10 @@ public class Point {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    @Override
+    public int compareTo(Point o) {
+        return this.getX() - o.getX();
     }
 }

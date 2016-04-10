@@ -18,6 +18,5 @@ public class GraphicsPanelUtil {
 
     public static void clearAllPoints() {
         graphicsPanel.getClickPoints().clear();
-        graphicsPanel.getViewPoints().clear();
     }
 }

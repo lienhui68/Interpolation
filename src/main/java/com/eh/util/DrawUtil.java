@@ -56,20 +56,20 @@ public class DrawUtil {
     }
 
     public static void drawViewPoints(Graphics2D g, List<Point> points) {
+        switch (ControlPanel.interpolationKind) {
+            case Lagrange:
+                g.setColor(Constants.Color_Lagrange);
+                break;
+            case Newton:
+                g.setColor(Constants.Color_Newton);
+                break;
+            case Spline:
+                g.setColor(Constants.Color_Spline);
+                break;
+        }
         for (Point p : points) {
-            switch (ControlPanel.interpolationKind) {
-                case Lagrange:
-                    g.setColor(Constants.Color_Lagrange);
-                    break;
-                case Newton:
-                    g.setColor(Constants.Color_Newton);
-                    break;
-                case Spline:
-                    g.setColor(Constants.Color_Spline);
-                    break;
-            }
             ScreenLocation screenLocation = convertPoint2ScreenLocation(p);
-            g.fillOval(screenLocation.getX()-1, screenLocation.getY() -1, 2, 2);
+            g.drawLine(screenLocation.getX(), screenLocation.getY(), screenLocation.getX(), screenLocation.getY());
         }
     }
 
